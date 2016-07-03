@@ -1,0 +1,262 @@
+<!DOCTYPE html>  
+<html>  
+<head>  
+<meta charset="utf-8"/>  
+<title>异步加载</title>  
+<style type="text/css"> html{height:100%} body{height:100%;margin-top:0px;padding:0px} #container{height:100%} </style>
+  <link rel="stylesheet" href="map.css">
+<script src="jquery-1.7.min.js" type="text/javascript"></script> 
+<script type="text/javascript"> 
+function initialize() {  
+  var map = new BMap.Map('map');  
+  map.centerAndZoom(new BMap.Point(121.491, 31.233), 11);  
+  map.enableScrollWheelZoom(true); 
+  map.setCurrentCity("上海");
+  map.addControl(new BMap.MapTypeControl());
+  map.enableInertialDragging();
+}  
+
+function $(id)
+{
+    return document.getElementById(id);
+    }  
+function loadScript() {  
+  var script = document.createElement("script");  
+  script.src = "http://api.map.baidu.com/api?v=2.0&ak=pFQBk39oIDs8dr3uRXWMX47kGEdRxg7w&callback=initialize";//此为v2.0版本的引用方式  
+  // http://api.map.baidu.com/api?v=1.4&ak=您的密钥&callback=initialize"; //此为v1.4版本及以前版本的引用方式  
+  document.body.appendChild(script);  
+  $("list").style.visibility="hidden";
+  $("around").style.visibility="hidden";
+  $("history").style.visibility="hidden";
+  $("route").style.visibility="hidden";
+  $("myinfo").style.visibility="hidden";
+}  
+   
+window.onload = loadScript;
+
+//控制顶部菜单栏
+var flag=0;
+function controltopDIV()
+{
+    if(flag==0)
+    {
+        $("map").style.visibility="hidden";
+        flag=1;
+    }
+    else
+    {
+        $("map").style.visibility="";
+        flag=0;    
+    }
+}
+var flag1=1;
+function controllistDIV()
+{
+    if(flag1==0)
+    {
+        $("list").style.visibility="hidden";
+        flag1=1;
+    }
+    else
+    {
+        $("list").style.visibility="";
+        flag1=0;    
+    }
+}
+var flag2=1;
+function controlaroundDIV()
+{
+    if(flag2==0)
+    {
+        $("around").style.visibility="hidden";
+        flag2=1;
+    }
+    else
+    {
+        $("around").style.visibility="";
+        flag2=0;    
+    }
+}
+var flag3=1;
+function controlhistoryDIV()
+{
+    if(flag3==0)
+    {
+        $("history").style.visibility="hidden";
+        flag3=1;
+    }
+    else
+    {
+        $("history").style.visibility="";
+        flag3=0;    
+    }
+}
+var flag4=1;
+function controlrouteDIV()
+{
+    if(flag4==0)
+    {
+        $("route").style.visibility="hidden";
+        flag4=1;
+    }
+    else
+    {
+        $("route").style.visibility="";
+        flag4=0;    
+    }
+}
+var flag5=1;
+function controlmyinfoDIV()
+{
+    if(flag5==0)
+    {
+        $("myinfo").style.visibility="hidden";
+        flag5=1;
+    }
+    else
+    {
+        $("myinfo").style.visibility="";
+        flag5=0;    
+    }
+}
+</script>  
+
+</head>  
+<body>  
+  <div id='topmenu'>
+    <button id="button" onclick="controltopDIV()">
+      菜单
+    </button>
+    <p id="toptitle">城市景观大众点评</p>
+  </div>
+  <div id='parentdiv'  style="width:100%;height:80%;position:relative;">
+    <div id='toplist'>
+   	 <div id='name-tag'>
+   	   <li class="selected-tag">上海近代公园</li>
+   	   <li class="unselected-tag">上海工业遗址</li>
+  	 </div>
+  	 <ul>
+  	 	<div class="item">
+  	 		<p id="place-name">1933老场房</p>
+  	 		<p id="place-score">评分★★★★★</p>
+  	 	</div>
+  	 </ul>
+  	 <ul>
+  	 	<div class="item">xxxxxxxxx</div>
+  	 </ul>
+  	 <ul>
+  	 	<div class="item">xxxxxxxxx</div>
+  	 </ul>
+  	 <ul>
+  	 	<li class="selected-tag">评分</li>
+  	 	<li  class="unselected-tag">收藏</li>
+  	 	<li  class="unselected-tag">足迹</li>
+  	 	<li  class="unselected-tag">心愿</li>
+  	 	<li  class="unselected-tag">推荐</li>
+  	 </ul>
+    </div>
+    <div id='list'>
+    <div id='name-tag'>
+   	   <li class="selected-tag">上海近代公园</li>
+   	   <li class="unselected-tag">上海工业遗址</li>
+  	 </div>
+  	 <ul>
+  	 	<div class="item">
+  	 		<p id="place-name">1933老场房</p>
+  	 		<p id="place-score">评分★★★★★</p>
+  	 	</div>
+  	 </ul>
+  	 <ul>
+  	 	<div class="item">xxxxxxxxx</div>
+  	 </ul>
+  	 <ul>
+  	 	<div class="item">xxxxxxxxx</div>
+  	 </ul>
+  	 <ul>
+  	 	<li class="selected-tag">评分</li>
+  	 	<li  class="unselected-tag">收藏</li>
+  	 	<li  class="unselected-tag">足迹</li>
+  	 	<li  class="unselected-tag">心愿</li>
+  	 	<li  class="unselected-tag">推荐</li>
+  	 </ul>
+    </div>
+    <div id='around'>
+    </div>
+    <div id='history'>
+    	<ul>
+    	<input type="text" placeholder="通过输入关键词搜索"></input>
+    	</ul>
+    	<ul>
+  	 		<div class="item">
+  	 			<p id="place-name">1933老场房</p>
+  	 			<p id="place-score">评分★★★★★</p>
+  	 		</div>
+  		</ul>
+  		<ul>
+  			<div class="item">xxxxxxxxx</div>
+  		</ul>
+  		<ul>
+  			<div class="item">xxxxxxxxx</div>
+  		</ul>
+  		<ul>
+  			<li class="selected-tag">评分</li>
+  			<li  class="unselected-tag">收藏</li>
+  			<li  class="unselected-tag">足迹</li>
+  			<li  class="unselected-tag">心愿</li>
+  			<li  class="unselected-tag">推荐</li>
+  		</ul>
+    </div>
+    <div id='route'>
+      <form action="" method="">
+        <p>出发地： <input type="text" name="from" />
+           目的地: <input type="text" name="to" /></p>
+        <input type="submit" value="导航" style="margin-left:45%" />
+      </form>
+    </div>
+    <div id='myinfo'>
+    	<img id="photo" src="Shimakaze.jpg">
+    	<p id="name">name</p>
+    	<div class="my-div">
+    		<button>注册</button>
+    		<button>登陆</button>
+    	</div>
+    	<div class="my-option">
+    		<div class="my-div">
+    			<button>足迹</button>
+    		</div>
+    		<div class="my-div">
+    			<button>心愿单</button>
+    		</div>
+    		<div class="my-div">
+    			<button>收藏</button>
+    		</div>
+    		<div class="my-div">
+    			<button>分享</button>
+    		</div>
+    		<div class="my-div">
+    			<button>关于我们</button>
+    		</div>
+    	</div>
+    </div>
+    <div id="map" style="width:100%;height:100%;position:absolute;z-index:2;">
+    </div>  
+  </div>
+  <div id='bottommenu'>
+    <button id="button" style="margin-left:25%" onclick="controllistDIV()">
+      项目列表
+    </button>
+    <button id="button" onclick="controlaroundDIV()">
+      附近
+    </button>
+    <button id="button" onclick="controlhistoryDIV()">
+      搜索历史
+    </button>
+    <button id="button" onclick="controlrouteDIV()">
+      路线规划
+    </button>
+    <button id="button" onclick="controlmyinfoDIV()">
+      我的
+    </button>
+  </div>
+</body>  
+</html>
